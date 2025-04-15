@@ -3,8 +3,13 @@ import { Link } from "honox/server";
 import Logo from "./Logo";
 import { HeartIcon } from "./HeartIcon";
 import { CJIcon } from "./CJIcon";
+import { useRequestContext } from "hono/jsx-renderer";
 
 const Document = ({ children, title }: { children: Child; title: string }) => {
+  const c = useRequestContext();
+
+  console.log(c.req.path);
+
   return (
     <html lang="en">
       <head>
@@ -14,11 +19,18 @@ const Document = ({ children, title }: { children: Child; title: string }) => {
         <Link href="/app/style.css" rel="stylesheet" />
       </head>
       <body>
-        <div className="flex flex-col min-h-screen max-w-[720px] mx-auto px-4 pt-8 pb-8">
-          <header className="mb-8 flex-shrink-0">
+        <div className="flex flex-col min-h-screen max-w-[720px] mx-auto px-8 pt-8 pb-8">
+          <header className="flex mb-8 flex-shrink-0 justify-between items-center">
             <a href="/">
               <Logo className=" hover:fill-accent" />
             </a>
+            <div className="flex">
+              {c.req.path === "/about" ? (
+                <p className="text-accent">about</p>
+              ) : (
+                <a href="/about">about</a>
+              )}
+            </div>
           </header>
           <main className="flex-grow">
             <article>{children}</article>
