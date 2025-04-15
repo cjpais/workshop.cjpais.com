@@ -1,0 +1,56 @@
+@import "tailwindcss" source("../app");
+
+@theme {
+  --color-bg-primary: hsl(35, 10%, 15%);
+  --color-text-primary: hsl(35, 10%, 75%);
+  --color-dim: hsl(35, 10%, 50%);
+  --color-bg-code: hsl(35, 10%, 10%);
+  --color-accent: hsl(270, 50%, 70%);
+}
+
+html {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+}
+
+a {
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 1.842rem;
+}
+h3 {
+  font-size: 1.3572rem;
+}
+
+code {
+  background: var(--color-bg-code);
+  padding: 0.2rem 0.4rem;
+  @apply rounded;
+  font-size: 0.9rem;
+}
+
+pre {
+  background: var(--color-bg-code);
+  padding: 0.6rem 0.8rem;
+  @apply rounded;
+  font-size: 0.9rem;
+}
+
+pre code {
+  background: none; /* Overrides the code background specifically inside pre */
+  padding: 0;
+  @apply rounded-none;
+}
+
+img {
+  @apply rounded-xl;
+}
