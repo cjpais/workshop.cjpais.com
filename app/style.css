@@ -54,3 +54,26 @@ pre code {
 img {
   @apply rounded-xl;
 }
+
+ul, ol {
+  @apply my-4 pl-5 list-outside;
+}
+
+ul {
+  @apply list-disc; /* Standard bullet points */
+}
+
+ol {
+  @apply list-decimal; /* Standard numbers */
+}
+
+/* Spacing between list items */
+li {
+  @apply mb-1;
+}
+
+/* Nested list styling */
+li > ul,
+li > ol {
+  @apply mt-0 mb-0 ml-0;
+}

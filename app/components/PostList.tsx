@@ -14,34 +14,36 @@ const PostList = ({
   posts: Record<string, { frontmatter: Meta }>;
 }) => {
   // if posts is empty return nothing
-  if (Object.keys(posts).length === 0) {
+  if (Object.values(posts).filter((p) => !p.frontmatter.draft).length === 0) {
     return null;
   }
 
   return (
     <div>
       <h1 class={"text-dim font-medium mb-4"}>{title}</h1>
-      <ul class="article-list space-y-3">
-        {Object.entries(posts).map(([id, module]) => {
-          if (module.frontmatter && !module.frontmatter.draft) {
+      <div class="space-y-3">
+        {Object.entries(posts).map(([id, post]) => {
+          if (post.frontmatter && !post.frontmatter.draft) {
             return (
-              <li class={"flex items-baseline"}>
-                <p class={"w-20 font-light text-dim"}>
-                  {formatDate(module.frontmatter.date)}
+              <div class={"flex items-baseline"}>
+                <p class={"w-20 min-w-20 font-light text-dim"}>
+                  {formatDate(post.frontmatter.date)}
                 </p>
                 <div class={"flex flex-col"}>
                   <a href={`${id.replace(/\.mdx$/, "")}`} class={"text-lg"}>
-                    {module.frontmatter.title}
+                    {post.frontmatter.title}
                   </a>
-                  <p class={"text-xs text-dim italic"}>
-                    {module.frontmatter.description.toLowerCase()}
-                  </p>
+                  {post.frontmatter.description && (
+                    <p class={"text-xs text-dim italic"}>
+                      {post.frontmatter.description?.toLowerCase()}
+                    </p>
+                  )}
                 </div>
-              </li>
+              </div>
             );
           }
         })}
-      </ul>
+      </div>
     </div>
   );
 };

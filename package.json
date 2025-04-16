@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode client && vite build",
+    "build": "vite build",
     "preview": "wrangler dev",
     "deploy": "bun run build && wrangler deploy"
   },
@@ -26,6 +26,6 @@
     "remark-mdx-frontmatter": "^5.1.0",
     "tailwindcss": "^4.0.9",
     "vite": "^6.1.1",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.11.1"
   }
 }
