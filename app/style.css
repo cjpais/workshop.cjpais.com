@@ -41,6 +41,8 @@ code {
   padding: 0.2rem 0.4rem;
   @apply rounded;
   font-size: 0.9rem;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone; /* For Safari */
 }
 
 pre {
