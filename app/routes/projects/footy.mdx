@@ -4,26 +4,37 @@ description: DIY foot pedal for speech to text. get ur foot in there
 date: Monday April 14th, 2025
 ---
 
-Footy is a DIY foot pedal I made for use with speech to text apps while
-I had my right hand in a cast with a broken finger. I would consider
-this an assistive technology device, however I think it's a fun exploration
-into alternative input devices as well. I think it's hilarious to 
-use a computer with your feet. So I want to share with you the journey of 
-how I made footy and how you can make one for yourself so you can
-explore the world of the foot computing and experience alternative input
-devices.
+import ExternalLink from "../../components/ExternalLink"
+
+Footy is a DIY foot pedal for your computer. Combined with a speech-to-text
+app, it's a fun and unique way to compute using your feet.
+
+I made Footy while I had a broken finger and my right hand was in a cast.
+I certainly consider Footy to be an accessibility device, but I think it
+can really be used by anyone who wants to use their computer differently.
+There's something hilarious yet satisfying about using your computer with your feet,
+and I want to share how you can build a Footy for yourself to explore 
+the world of foot computing.
 
 ![Footy Foot Pedal](/images/footy/footy.jpeg "footy in all its glory")
 
 ## Background
 
-When I broke my finger it became very obvious I needed to be using
-speech to text on a daily basis. Fortunately I have a ton of experience
-with Whisper through writing Whisperfile, as well as running it on 
-the [andromeda.computer](https://andromeda.computer) network
-which powers [Geppetto](https://geppetto.app).
+I broke my finger on January 2nd and was put into a cast soon after.
+As soon as I had broken my finger, I was using speech or text all of the time on my Mac.
+But it was quite uncomfortable/painful to use with a broken finger so I started thinking about ways in which I could trigger
+speech to text without needing my hand or fingers.
+A foot pedal became immediately obvious as a solution.
+
+I checked Amazon for computer foot pedals, but found only 
+USB-A options (unacceptable). With this I decided to make my own, and
+Footy was born.
 
 ## Requirements
+
+With some background in mechanical keyboards and their firmware, I figured 
+the most straightforward approach would be to build what's essentially a 
+one-key keyboard for your foot. My requirements quickly shaped up to be:
 
 * USB-C Connector
 * QMK Firmware
@@ -37,20 +48,104 @@ which powers [Geppetto](https://geppetto.app).
 
 ## Prototype
 
-The main components of the prototype I needed to decide on were the microcontroller
-and the case. After a little bit of looking around I decided on the Seeed Studio XIAO RP2040
+I needed to decide on two key components: the microcontroller and the case. 
+After a little bit of looking around I decided on the Seeed Studio XIAO RP2040
 for the microcontroller as it was cheap, tiny, and had a built in USB-C connector. For the
-case I browsed around for quite a while, and eventually found this Adafruit project 
-for a foot pedal which I used as the base for my design.
+case I browsed around for quite a while, and eventually found this 
+<ExternalLink href="https://learn.adafruit.com/USB-foot-switch-circuit-python" target="_blank">Adafruit project</ExternalLink>
+for a foot pedal which I used as the foundation for my design.
+
+After some minor hacking on the case and initial QMK firmware, I had a working prototype.
+Here's what it looked like before I accidentally destroyed it by using CA glue:
+
+![Footy Prototype](/images/footy/footy_proto.jpeg)
 
 You can check out more details about the prototype on this 
-<a href="https://www.dumpster.page/footy" target="_blank">dumpster page</a>.
+<ExternalLink href="https://www.dumpster.page/footy" target="_blank">dumpster page</ExternalLink>.
 
-.... something here
+## V1
 
-## Final Version
+While the prototype worked, it was janky and too handwired for my taste.
+I wanted something a bit easier for someone else to make if they wanted.
+Basically, all I wanted was a Cherry MX switch to be on the same PCB as the RP2040 microcontroller.
+I thought a little about making a custom PCB, but discovered
+the <ExternalLink href="https://keeb.io/products/stampy-rp2040-usb-c-controller-board-for-handwiring">Stampy microcontroller</ExternalLink>
+which seemed very well suited to this project. Plus, its name was just perfect. 
+I was going to be putting a Stampy into my Footy and I would be stamping on my Footy.
+
+### 3D Printable Case
+
+I modified the Adafruit foot pedal design for the Stampy. I adding heat set inserts to the base 
+for secure mounting, and a larger rectangle on top for better switch actuation. 
+All customizations were done in Autodesk Fusion, and you can find both `.stl` 
+files for printing and `.f3d` files for modification on 
+<ExternalLink href="https://makerworld.com/en/models/1185240-footy">Makerworld</ExternalLink>.
+
+### QMK + VIA Firmware
+
+I wrote QMK firmware for Footy along with a VIA profile to make it easily customizable.
+QMK is firmware for keyboards, and VIA makes it easy to change keymaps and other things.
+The firmware primarily targets the center switch on the Stampy.
+
+The main thing for it was to get my key binding for handy or superwhisper to be the default.
+
+I have an <ExternalLink href="https://github.com/qmk/qmk_firmware/pull/25151">open PR</ExternalLink> 
+in the QMK repo for the Footy firmware. Once merged, I'll submit a PR to VIA so Footy gets official support there as well.
+
+## Build Guide
+
+Building your own Footy is easy
+
+### Steps
+
+1. Download and 3D print the case (or [email me](mailto:cj@cjpais.com), I can print you one)
+2. Download and flash the firmware on the Stampy
+3. Put the Stampy in the Footy
+4. Plug it in and start computing with your feet!
 
 ### Materials Needed
 
+* (1x) <ExternalLink href="https://makerworld.com/en/models/1185240-footy">Footy Case</ExternalLink>
+* (1x) <ExternalLink href="https://keeb.io/products/stampy-rp2040-usb-c-controller-board-for-handwiring">Stampy Microcontroller</ExternalLink>
+* (1x) Cherry MX Switch (ideally with 3 and not 5 legs)
+* *optional: (2x) M3x4mm - Heat Set Inserts*
+* *optional: (2x) M3x6mm - Screws*
+
+### Flashing the Firmware
+
+You can find the QMK/VIA enabled firmware here:
+
+* <ExternalLink href="https://blob.cjpais.com/footy/footy_default.uf2">Footy Default Keymap</ExternalLink> (triggers the `b` key)
+* <ExternalLink href="https://blob.cjpais.com/footy/footy_handy.uf2">Footy Handy Keymap</ExternalLink> (triggers `RCTL + RGUI` while held down)
+* <ExternalLink href="https://blob.cjpais.com/footy/footy_superwhisper.uf2">Footy Superwhisper Keymap</ExternalLink> (triggers `LOPT + SPACE` while held down)
+* <ExternalLink href="https://blob.cjpais.com/footy/via.json">via.json</ExternalLink>
+
+You can flash the firmware on the Stampy by plugging it into your computer and double clicking the button on it. 
+This will load the Stampy into it's bootloader. From here, drag and drop the `.uf2` file of your 
+choosing onto the drive that appears on your computer's file explorer. The Stampy will reboot, and it should turn into a working Footy.
+
+## Using Footy
+
+It's funny how you become accustomed to a thing without even realizing it. And of course you notice when it's gone the most.
+Most of the time this is when I'm on the couch and not at my desk. And all of a sudden I want to speak to my computer, but don't have my Footy to do so.
+
+It's interesting because I also have speech to text buttons on my desk, yet Footy is my go-to.
+I think maybe it's because when I have my hands on a keyboard, I naturally want to type. But my feet have no such inclination.
+
+Footy gets a lot of use for me when I'm at my desk programming, emailing, sending messages, or
+talking to large language models for help in all of these things.
+
+I wrote most of this post using my voice. I love using my voice for something like this.
+There are times at which the syntactic preciseness of typing is important, but I find I like to think and converse with my voice more than I do through writing specifically.
+I'm curious in the future to try to write even more conversationally as a result. This post largely has a format of a blog post, but I am interested in what a non-linear conversation may look like too.
 
 ## Looking Forward
+
+This was a super fun project for me and honestly made a big difference in my life.
+During the time when I had the cast on it was truly invaluable. Before Footy was created, work was extremely annoying, if not painful. 
+I didn't want to sit at my desk for more than an hour at a time, and it would give me a headache.
+
+I also wrote my own custom speech-to-text application called Handy during this time, which I'll be sharing more about soon.
+It's gonna be a fully open source desktop application.
+
+I also want to do a larger reflection on using speech-to-text and voice with the computer generally so be on the lookout for that.

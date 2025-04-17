@@ -14,7 +14,10 @@ const PostList = ({
   posts: Record<string, { frontmatter: Meta }>;
 }) => {
   // if posts is empty return nothing
-  if (Object.values(posts).filter((p) => !p.frontmatter.draft).length === 0) {
+  if (
+    Object.values(posts).filter((p) => !p.frontmatter || !p.frontmatter.draft)
+      .length === 0
+  ) {
     return null;
   }
 

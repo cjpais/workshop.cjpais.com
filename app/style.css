@@ -53,6 +53,7 @@ pre code {
 
 img {
   @apply rounded-xl;
+  @apply justify-self-center;
 }
 
 ul, ol {
