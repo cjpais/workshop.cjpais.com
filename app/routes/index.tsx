@@ -27,7 +27,7 @@ export default function Top() {
 
       <hr class={"mt-8"} />
 
-      <div class="flex mt-6 items-baseline">
+      <div class="flex mt-6 items-start">
         <h3 class={"text-dim font-medium w-20 min-w-20"}>Seeds</h3>
         <div>
           {seedList.map((seed, index) => (

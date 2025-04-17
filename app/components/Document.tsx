@@ -37,7 +37,7 @@ const Document = ({ children, title }: { children: Child; title?: string }) => {
         )}
       </head>
       <body>
-        <div className="flex flex-col min-h-dvh max-w-[720px] mx-auto px-8 pt-8 pb-4 sm:pb-8">
+        <div className="flex flex-col min-h-dvh max-w-[720px] mx-auto sm:px-8 px-6 pt-8 pb-4 sm:pb-8">
           <header className="flex mb-8 flex-shrink-0 justify-between items-center">
             <a href="/">
               <Logo className="hover:fill-accent" />

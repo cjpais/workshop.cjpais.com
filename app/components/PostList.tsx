@@ -30,7 +30,9 @@ const PostList = ({
             return (
               <div class={"flex items-baseline"}>
                 <p class={"w-20 min-w-20 font-light text-dim"}>
-                  {formatDate(post.frontmatter.date)}
+                  {post.frontmatter.date
+                    ? formatDate(post.frontmatter.date)
+                    : "unknown"}
                 </p>
                 <div class={"flex flex-col"}>
                   <a href={`${id.replace(/\.mdx$/, "")}`} class={"text-lg"}>
