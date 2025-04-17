@@ -1,10 +1,8 @@
 import PostList from "../components/PostList";
-import { Meta } from "../types";
+import { getProjects } from "../lib/helpers";
 
 export default function Projects() {
-  const projects = import.meta.glob<{ frontmatter: Meta }>(`./projects/*.mdx`, {
-    eager: true,
-  });
+  const projects = getProjects();
 
   return <PostList title="Projects" posts={projects} />;
 }

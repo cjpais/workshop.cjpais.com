@@ -1,5 +1,5 @@
 import PostList from "../components/PostList";
-import { Meta } from "../types";
+import { Meta } from "../lib/types";
 
 export default function Projects() {
   const relections = import.meta.glob<{ frontmatter: Meta }>(

@@ -1,4 +1,4 @@
-import { Meta } from "../types";
+import { FullPost, Meta } from "../lib/types";
 import { parse, format } from "date-fns";
 
 const formatDate = (date: string) => {
@@ -6,18 +6,9 @@ const formatDate = (date: string) => {
   return format(parsedDate, "MMM yyyy");
 };
 
-const PostList = ({
-  title,
-  posts,
-}: {
-  title: string;
-  posts: Record<string, { frontmatter: Meta }>;
-}) => {
+const PostList = ({ title, posts }: { title: string; posts: FullPost[] }) => {
   // if posts is empty return nothing
-  if (
-    Object.values(posts).filter((p) => !p.frontmatter || !p.frontmatter.draft)
-      .length === 0
-  ) {
+  if (posts.length === 0) {
     return null;
   }
 
@@ -26,27 +17,24 @@ const PostList = ({
       <h1 class={"text-dim font-medium mb-4"}>{title}</h1>
       <div class="space-y-3">
         {Object.entries(posts).map(([id, post]) => {
-          if (post.frontmatter && !post.frontmatter.draft) {
-            return (
-              <div class={"flex items-baseline"}>
-                <p class={"w-20 min-w-20 font-light text-dim"}>
-                  {post.frontmatter.date
-                    ? formatDate(post.frontmatter.date)
-                    : "unknown"}
+          return (
+            <div class={"flex items-baseline"}>
+              <p class={"w-20 min-w-20 font-light text-dim"}>
+                {formatDate(post.date)}
+              </p>
+              <div class={"flex flex-col"}>
+                <a
+                  href={`${title.toLowerCase()}/${post.slug}`}
+                  class={"text-lg"}
+                >
+                  {post.title}
+                </a>
+                <p class={"text-xs text-dim italic"}>
+                  {post.description.toLowerCase()}
                 </p>
-                <div class={"flex flex-col"}>
-                  <a href={`${id.replace(/\.mdx$/, "")}`} class={"text-lg"}>
-                    {post.frontmatter.title}
-                  </a>
-                  {post.frontmatter.description && (
-                    <p class={"text-xs text-dim italic"}>
-                      {post.frontmatter.description?.toLowerCase()}
-                    </p>
-                  )}
-                </div>
               </div>
-            );
-          }
+            </div>
+          );
         })}
       </div>
     </div>
