@@ -21,7 +21,7 @@ const HeaderLink = ({ title }: { title: string }) => {
   );
 };
 
-const Document = ({ children, title }: { children: Child; title: string }) => {
+const Document = ({ children, title }: { children: Child; title?: string }) => {
   const c = useRequestContext();
 
   return (
@@ -45,13 +45,14 @@ const Document = ({ children, title }: { children: Child; title: string }) => {
             <div className="flex gap-2">
               <HeaderLink title="about" />
               <HeaderLink title="projects" />
-              <HeaderLink title="reflections" />
+              <HeaderLink title="seeds" />
+              {/* <HeaderLink title="reflections" /> */}
             </div>
           </header>
           <main className="flex-grow">
             <article>{children}</article>
           </main>
-          <footer className="flex w-full justify-center self-center items-center mt-6 sm:mt-12 pt-4 border-t text-sm text-center flex-shrink-0">
+          <footer className="flex w-full justify-center self-center items-center mt-6 sm:mt-12 pt-4 border-t border-very-dim text-sm text-center flex-shrink-0">
             <CJIcon />
             with <HeartIcon />
           </footer>
