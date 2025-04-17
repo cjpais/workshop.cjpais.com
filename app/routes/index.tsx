@@ -1,5 +1,4 @@
 import PostList from "@components/PostList";
-import { Meta } from "../lib/types";
 import { getProjects, getSeeds } from "../lib/helpers";
 
 export default function Top() {

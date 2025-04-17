@@ -1,5 +1,5 @@
-import { FullPost, Meta } from "../lib/types";
 import { parse, format } from "date-fns";
+import { FullPost } from "../lib/types";
 
 const formatDate = (date: string) => {
   const parsedDate = parse(date, "EEEE MMMM do, yyyy", new Date());

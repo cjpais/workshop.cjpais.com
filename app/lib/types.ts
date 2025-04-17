@@ -1,12 +1,5 @@
 import { z } from "zod";
 
-export type Meta = {
-  title?: string;
-  date?: string;
-  description?: string;
-  draft?: boolean;
-};
-
 export const FullPostFrontmatterSchema = z.object({
   title: z.string(),
   date: z.string(),

@@ -2,12 +2,12 @@ import { z } from "zod";
 import {
   FullPost,
   FullPostFrontmatterSchema,
-  Meta,
   Seed,
   SeedFrontmatterSchema,
   SortDirection,
 } from "./types";
 import { parse } from "date-fns";
+import { Meta } from "../global";
 
 export const parseFrontmatterDate = (date: string) => {
   return parse(date, "EEEE MMMM do, yyyy", new Date());
@@ -33,7 +33,7 @@ export const parseContent = <T>(
     .map(([filePath, item]) => {
       const parse = schema.safeParse(item.frontmatter);
       if (!parse.success) {
-        console.log(
+        console.error(
           `${filePath} has invalid frontmatter.\nfrontmatter: ${item.frontmatter}\nerror:`,
           parse.error.message
         );
@@ -57,7 +57,6 @@ export const getProjects = (
   limit: number = 7
 ) => {
   const rawProjects = fetchProjectContent();
-  console.log(rawProjects);
   const projects = parseContent<FullPost>(
     rawProjects,
     FullPostFrontmatterSchema

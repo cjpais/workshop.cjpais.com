@@ -1,6 +1,6 @@
 import { Child } from "hono/jsx";
 import Document from "./layout/Document";
-import { Meta } from "../lib/types";
+import { Meta } from "../global";
 
 const MDXRenderer = ({
   children,
