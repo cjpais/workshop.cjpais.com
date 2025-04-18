@@ -13,7 +13,7 @@ export default jsxRenderer(({ children }) => {
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
-    title = `${title} - ${slug}`;
+    title = `${slug} - ${title}`;
   }
 
   return <Document title={title}>{children}</Document>;
