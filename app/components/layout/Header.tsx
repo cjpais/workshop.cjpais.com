@@ -20,15 +20,9 @@ const HeaderLink = ({ title }: { title: string }) => {
 const Header = () => {
   return (
     <header className="flex sm:flex-row flex-col gap-2 mb-8 flex-shrink-0 justify-between sm:items-center">
-      {useRequestContext().req.path === "/" ? (
-        <a href="/" className="active:fill-accent">
-          <Logo className="fill-accent" />
-        </a>
-      ) : (
-        <a href="/" className="active:fill-accent">
-          <Logo className="hover:fill-accent" />
-        </a>
-      )}
+      <a href="/" className="active:fill-accent">
+        <Logo className="hover:fill-accent" />
+      </a>
       <div className="flex gap-2">
         <HeaderLink title="projects" />
         <HeaderLink title="seeds" />
