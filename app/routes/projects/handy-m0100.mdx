@@ -5,68 +5,216 @@ date: Wednesday April 9th, 2025
 draft: true
 ---
 
-Details coming soon
+I turned a 40 year old Apple Mouse into a speech to text button.
 
-I'm actually using this mouse to write the whole thing.The one I'm using is an Apple M0100 mouse from 1984.
+![A 1985 Apple Mouse sitting on top of a 2025 Macbook Pro](/images/handy-m0100/computer.jpeg)
 
-The backstory for this mouse is that I went to the Vintage Computer Fair with my friend Jordan.
-Here's a dumpster page from that event. Going into the event, I had brought my foot pedal because I saw PCBway was a sponsor and I was maybe interested in talking to someone there about does it make sense for me to make a custom PCB design for my foot pedal footy.
+## Backstory
 
-As you now know, from the footy post, I did not make my own PCB design. However, I was kind of on the lookout for foot pedals or things that might be good foot pedals.
-It's funny because I saw the M0100 and immediately put it on the ground and used it with my toe and it was a great foot pedal.
-So I really was hoping that I could buy one at this point. I also thought it was hilarious to use a mouse as a foot pedal, of course, but also how cool it was to have something so old if it could be a foot pedal.
+I had some plans to go to the [SoCal Vintage Computer]() Fair with my friend [Jordan](). At
+the time I had a broken finger and had been working on the [footy](/projects/footy) foot pedal
+and I had just finished the prototype. Going into the event I brought footy,
+because I saw PCBway was a sponsor and I was interested in talking to someone there about
+the possibility of making custom PCB design for footy. While I didn't end up making a custom
+PCB for footy I definitely went into the event thinking about foot pedals and maybe some
+vintage computer hardware that could be used for one.
 
-There was a guy there, fortunately, who was selling some of these mice, and I was able to get two of them.
+TODO VCF PHOTO
+
+Jordan and I walked around for a while [enjoying all that the fair had to offer](https://dumpster.page/vcf2025).
+I learned a bunch about all kinds of hardware I had never seen before. On the first lap around
+the fair I did take keen notice of the vintage Apple mice. I half joked with Jordan about turning
+one into a foot pedal, and on the second lap I was seriously considering it. I even found one and
+put it on the ground to test how it might be. Mostly just for the laughs, how hilarious to have
+a mouse from the 80's as a speech to text foot pedal for my computer. And in trying it in some
+ways it actually felt better as a foot pedal than footy.
+
+After giving it a try I knew I wanted to buy at least one. Be it for a foot pedal, or just as
+a really unique speech to text button for my computer. There was a guy early on who I bought
+a couple of Byte magazines from, and he happened to have a few of these mice. I asked him if
+he was willing to sell two of them, and he agreed, 2 for $40. Some other guy told me I was getting
+a good deal, but honestly I had no idea if I had. It was only later I went on eBay to check, and
+it seems like I did. I figured I wanted to get 2 of them mostly in the case I were to break one
+which seemed highly likely given my dissasembly skills.
 
 As soon as I got home, I wanted to open it up just to see what the insides looked like.
-When I tried opening up the first one, I ended up breaking some of the clips because I didn't go on YouTube and figure out how these things actually assembled and I just brute-forced it apart.
+When I tried opening up the first one, I ended up breaking some of the clips because I didn't
+go on YouTube and figure out how these things actually assembled and I just brute-forced it apart.
 But I got to look at the insides and they looked something like this.
 
-I had a bunch of initial thoughts. The first thing that I was hoping for is that I could just like splice on a USB-C connector and use the same firmware and everything that I did from Fuddi and have it just work over USB-C.
-The main thing that I didn't like about this was I really wanted to keep the original cable intact as well as I wasn't sure how I could splice on this connector and have it look original still and that was pretty important to me to keep the aesthetics pretty clean.
+TODO reassemble
 
-But I had two other thoughts. The first was, I could try to reuse the existing PCB and switch that's there, and just wire it to a new microcontroller and have that be the thing connecting. And initially my plan was also to use USB-C, but there wasn't enough space within the mouse to do that.
-In fact, where I wanted to put the USB-C connector would be on the front of the mouse, and there definitely was not enough space for the connector to even fit through that area.
+## Prototype Exploration
 
-The second thing I thought about was, well, I could 3D print a new base plate where everything would sit on top of, and I would have a lot more room to experiment with whatever I want on the inside instead of trying to keep the PCB and all the internals intact.
-I thought overall that this design would be a bit easier because I have a lot more room to play with and I don't have to worry about anything in particular. So this is the path that I started going down.
+I had a bunch of initial thoughts. The first thing that I thought was that I could
+just splice a USB-C connector onto the existing cable. This seemed like it could be a pain
+for a few reasons but I really wanted to keep the original cable intact. It also wasn't clear to me
+how I could splice on this connector and have it look original still.
 
-I measured out the original PCB and a bunch of the dimensions for some of the structures which would be important and I ended up modeling this in Fusion 360 and overall it makes a working base plate.
-I also wanted to clean up the bottom of the mouse because there was no longer going to be a ball sitting there and actually I needed the USB-C connector to be charged from the bottom. That was the only opening which was big enough and of course to mimic the Apple Magic mouse we had to put the connector on the bottom.
+The first few constraints emerged. First to be nondestructive to this Apple mouse. It should
+be able to return to service after I have modified it for what I want. Second I wanted to
+keep it looking as close to an original Apple Mouse as possible.
 
-Oh yeah, I forgot to mention, this new version was gonna be wireless, not wired. Partially because there's no space on the mouse without modifying it to make it wired, but also because I thought it'd be way cooler to have a wireless mouse from 1984.
+With these new constraints I had a few other ideas. The first was, I could try to reuse the
+existing PCB and switch that's there, and just wire it to a new microcontroller.
+The second thing I thought about was, well, I could 3D print a new baseplate where everything
+would sit on top of, and I would have a lot more room to experiment with whatever I
+want on the inside. This seemed a lot easier than both trying to keep the PCB intact
+as well as somehow fitting whatever new microelectronics needed to go in it.
+With this in mind I started to get to work on the first prototype.
 
-For the base plate, I did have to find a new switch for the mouse button and I did use an Amaran switch which is common in mice today. It's a micro switch, much smaller than the original one.
+## Building the First Prototype
 
-I did end up fully building a mouse with the base plate and it totally works. The only problem that I have with it is that the switch doesn't feel quite as good as the original one.
+Initially my plan was also to use USB-C, like footy, but I wanted a removable connection, not
+a permanant one for whatever reason (now that I think of it, it would be rad to make
+a new cable that looks original and just has a USB-C connector on the end).
+Ultimately I tried this, but there wasn't enough space for a USB-C port on the front of the mouse.
+Plus a wireless 1985 mouse is way cooler than a wired one.
 
-So I ended up also deciding that I want to use the original PCB. And basically this worked out really nicely because the Xiao microcontroller I was using fits within the area where the trackball would have been.
+So now everything was clear, my prototype would:
 
-So I kind of just took the bottom plate design that I had made and just stuck it in there and it turns out it worked. And I experimented a little bit with the connectors and stuff like that because one of the things I really didn't want to do was solder anything down permanently in this design.
-I really wanted to keep the original PCB working as it did originally, so the mouse could be put back together feasibly.
+- Use Bluetooth to connect
+- Not damage any of the original parts
+- Look as close to original as possible
+- Use a custom 3D printed baseplate
 
-I also had to decide on a battery size and this ended up being an 80 mAh battery.
+### Deciding on the Microcontroller
 
-The firmware is written with ZMK which is more specific for Bluetooth devices than QMK as QMK I guess has a lot of issues with Bluetooth.
+This was a fairly quick task. But the biggest thing I realized was that using QMK did not seem
+as viable for Bluetooth keyboards. So I looked around and found ZMK which looked purpose built
+for diy wireless keyboards/input devices. And reading through the docs it was clear I should
+use some microcontroller based on the Nordic nRF52840. I did need it to be as small as possible
+which kind of threw out the possibility of the common microcontrollers for ZMK like the Nice!Nano.
+But I did have some experience with the Seeed Xiao series which are tiny, so I looked and they had
+the Xiao-nRF52840, I figured this would be perfect.
 
-Though I found setting up ZMK way harder than setting up QMK generally speaking.
+### 3D Modeling
 
-The firmware was built through a GitHub action at least I didn't set up a local build environment
+#### Baseplate
 
-But not gonna lie, having a 40 year old mouse and turning it into something still useful today is fucking rad as shit.
+TODO photo of the 3d model
+
+With the microcontroller decided upon, it made it possible for me to start designing the baseplate.
+I measured the original M0100 PCB, as well as a bunch of the structures. Things like the screw holes,
+the trackball hole, and most importantly the structure which holds up the button. With all the dimensions
+I modeled the baseplate in Fusion 360.
+
+Along the way I decided that the microcontroller shouldn't attach to the baseplate directly.
+Instead it should sit vertically inside the mouse, so that the USB-C
+port would be sticking out from the bottom of the mouse so it could be charged. I guess this is how
+Apple must have decided on how to charge the Magic Mouse. Makes perfect sense now doesn't it.
+
+I also would need a switch to attach to the baseplate, I wanted to try and use the same switch
+as the original Apple Mouse, but the most available switch for the prototype was the Omron D2F-01F
+which is commonly used in mice today. It also ended up being a more or less perfect fit for the baseplate
+and just screw into it. Though it is much smaller than the original switch and definitely does not
+have as satisfying of a 'click'.
+
+I will say it took me forever to create nice enough structures for the mouse to work. I feel like
+it's still not perfect, but it's good enough for me. I probably went through about 30 iterations
+of the design to land where it is now. I think I have a lot more modeling experience from this
+and it probably just needs a clean room design at this point.
+
+#### USB-C Charging Plate
+
+TODO photo of the 3d model
+
+On the original mouse, there is this little twist off plate which holds the trackball in place.
+This was exactly the area I wanted to put the microcontroller through, which meant I needed
+to design a new plate so that the USB-C port for charging would be accessible. This was a pretty
+fun thing to model, it needed to twist and lock into place, as well as have a tight fit for the microcontroller.
+I measured Apple's original plate quite carefully and was quite proud that my first iteration of the
+design printed and worked. I did make a few tweaks to the design, but overall it's almost exactly as
+originally designed.
+
+![The twist lock plate I designed for the USB C charging port](/images/handy-m0100/usbc-plate.jpeg)
+
+### Flashing the Firmware
+
+### Soldering and Assembly - TODO
+
+First thing's first, that is to solder everything to the Xiao. I typically start with the battery, and
+I like to make everything removable which means soldering some JST leads onto the Xiao. I use the
+positive pin on the battery section, and the ground on the board itself. Typically LiPO batteries have
+a JST on them as well, so you can just plug whatever size battery you want in.
+
+Next is soldering some leads to the switch.
+
+With all the components acquired, the models 3D printed, and the microcontroller and switch soldered,
+it was time to assemble the dang thing. First things first, always flash the firmware _BEFORE_
+putting anything together. I developed a tiny piece of firmware based on ZMK which you can find
+[here](https://github.com/cjpais/handy_m0100).
+
+The assembly is quite simple, the first thing I like to do is take the switch and solder some
+leads to the legs. From there I screw it directly into the baseplate using some M2x6mm screws?
+
+After this I seat the baseplate in the mouse and screw it down using the screw which originally
+held the PCB in place. From there I put in the microcontroller into the plate and push
+the plate through.
+
+Photo of the final mouse assembled.
+
+## Using the Orignal PCB
+
+After creating the first iteration of the mouse I decided that I really wanted to use the original
+PCB. I kept clicking the OG switch and it was just so damn satisfying I had to try to use the PCB.
+What's funny is after I figured out all of the stuff from the other version, this became a pretty
+simple task. Just a matter of stuffing everything into the original spaces.
+
+I had a few things that I thought were important. Similar to the other design I really didn't
+want anything to be permanant, so all of the connectors had to be JST again, however with the
+cramped spaces it really is best to use JST-ZH. That way they can fit through all the random
+gaps here and there in the mouse.
+
+The Xiao microcontroller fits within the area where the trackball would have been with no problem.
+Plus I could use the same USB-C plate no problem. The only thing left is a place for the battery,
+and I chose an 80mAh battery since I figured it would be very easy to find a place for it. And sure
+enough on the corner of the mouse there's a space it fits quite nicely
+
+![photo of the battery slotted into the mouse]()
 
 Not to mention it's like actually genuinely useful and while I love my foot pedal partially because it's not wireless I can't travel very easily with it but I can totally throw this 1980s mouse in my backpack and carry it with me anywhere.
 
 The battery life is surprisingly great as well. I do have deep sleep enabled, so the mouse will go to sleep and consume almost no power, and you just click the button and once to turn it back on.
 
+## Feelings
+
 I think there's also something very just aesthetically beautiful about the M0100.
-It just speaks to a simpler time, and I kind of hope that computers can be simpler again, in many ways. I feel like the world has just made them so complex because the world is so complex. But sometimes you just need something simple.
+It speaks to a simpler time, and I kind of hope that computers can be simpler again, in many ways.
+I feel like the world has just made them so complex because the world is so complex. But sometimes you just need something simple.
+Things that don't need to serve many purposes for millions of people, but things that serve the perfect purpose for a few.
+I think that's in many ways what this project represents for me. It's certainly not something for everyone and that's
+a wondeful thing. It suits me, and not gonna lie, having a 40 year old mouse and turning it into something still useful today is fucking rad as shit.
 
-And this mouse is in many ways very simple. And yeah, it was really fun to be able to reuse something from the 80s.
+## Wanna Build One??
 
-And if you want to build one of these yourself, you can find all of the files on Makerworld for both the baseplate as well as the bottom ring.
-The firmware is available at links that I have.
-And here are the supplies that I used to build it.
+Hopefully I've done a good enough job of talking through things here that it's easy enough to do.
+Here are the resources you may need
 
-The YouTube video for this one I think is more or less just going to show it off and show off the internals of the device as well as me using it on my desk and maybe some B-roll shots of it just being there as well as maybe, you know, a USB-C cord plugged into the bottom of it and how to flash the firmware and stuff like that as well as some notes on things you've got to be careful of, etc. And even opening it up.
-Beyond that, it's mostly just to show off that you can take a mouse from the 80s and repurpose it. There's probably some clever title to be had.
+You can find the 3D printable models here:
+
+- [Handy M0100 Internal Baseplate]()
+- [USB-C Bottom Plate]()
+
+Here are the components you may need: (TODO)
+
+- Omron switch
+- 2x screws
+- JST connectors (ZH or PH)
+- LiPO Battery
+  - [The 80mAH I used]()
+  - [The 120mAH I used]()
+- Dupont Cables?
+
+And the firmware can be found here:
+
+- [Handy M0100 Firmware](https://github.com/cjpais/Handy-M0100-Firmware)
+
+## Future?
+
+This project has been a blast and I really love using a old Apple mouse with my modern computer.
+There's something that feels right about it. I've never really tinkered with older hardware before
+and I feel like this was maybe the easiest introduction I could have into that world.
+
+One thing I would really love to do is make an actual PCB with a switch soldered on.
+It would be really great to make some better structures to hold the button itself as well.
