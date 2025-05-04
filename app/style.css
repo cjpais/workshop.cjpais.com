@@ -47,6 +47,10 @@ code {
   font-size: 0.9rem;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone; /* For Safari */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 pre {
@@ -54,12 +58,15 @@ pre {
   padding: 0.6rem 0.8rem;
   @apply rounded;
   font-size: 0.9rem;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 pre code {
-  background: none; /* Overrides the code background specifically inside pre */
+  background: none;
   padding: 0;
   @apply rounded-none;
+  white-space: pre;
 }
 
 img {

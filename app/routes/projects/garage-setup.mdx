@@ -1,0 +1,57 @@
+---
+title: Setting up Garage S3
+description: a look inside garage s3 and how i set it up for andromeda.computer
+date: Sunday May 4th, 2025
+draft: true
+---
+
+Okay, I'm just gonna ramble a little bit about how I set up garage.
+
+On macOS there are quite a lot of frustrations. 
+The main thing is you definitely need to have Docker or wherever you're running this have full disk access, especially if you're running on external drives, which seems most practical to me most times.
+You basically need to have access to the screen or the Mac. So the best way to do this is probably over screen sharing.
+You also wanna make sure that whatever thing Docker is running on boots up at start. I use OrbStack typically
+
+I more or less just followed the instructions on the website for garage.
+
+One important thing to note is when using external drives, this is how I do it:
+
+`/etc/garage.toml`
+
+```
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/mnt/garage/data"
+db_engine = "lmdb"
+metadata_auto_snapshot_interval = "6h"
+
+replication_factor = 3
+
+compression_level = 2
+
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "<tailscale_addr>:3901"
+rpc_secret = ""
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.garage"
+
+[s3_web]
+bind_addr = "[::]:3902"
+root_domain = ".web.garage"
+index = "index.html"
+```
+
+docker command
+```
+docker run -d --name garaged --restart always --network host -v /etc/garage.toml:/etc/garage.toml -v /var/lib/garage/meta:/var/lib/garage/meta -v /mnt/garage/data:/mnt/garage/data dxflrs/garage:v1.1.0
+```
+
+It probably makes a lot of sense to move this to Docker compose soon and get consistent naming schemes and stuff.
+
+**running the webui**
+
+```
+docker run -d -v /etc/garage.toml:/etc/garage.toml:ro --restart unless-stopped --name garage-webui -e S3_ENDPOINT_URL="http://127.0.0.1:3900" -e API_BASE_URL="http://127.0.0.1:3903" -e API_ADMIN_KEY="<KEY_HERE>" --network host khairul169/garage-webui:latest
+```
