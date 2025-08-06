@@ -1,0 +1,37 @@
+---
+title: "Dumpster Page"
+description: "fast and dirty way to dump onto the internet"
+startDate: January 2025
+endDate: February 2025
+---
+
+import ExternalLink from "@components/ExternalLink";
+
+<ExternalLink href="https://dumpster.page">dumpster.page</ExternalLink> is a collaborative drag and drop webpage builder. The original concept was to create a place for sharing photos from events and trips that felt like more like a collaborative scrapbook than just a bunch of squares on a screen like iCloud/Google Photos albums. But of course it could be used for so many other things.
+
+For dumpster.page I didn't want people to have to sign up to a product or mess around with anything, but simply be able to claim a URL and put whatever they want on it. It was extremely inspired by <ExternalLink href="https://mmm.page">mmm.page</ExternalLink>. The one thing I really wanted with mmm.page was to be able to collaborate on it more easily with friends.
+
+So dumpster.page became just that. A place where you could dump a bunch of stuff and it shows up on a webpage.
+
+I broke down the flow of the application into four main components.
+
+1. Index Page
+2. Create a new dumpster.page
+3. Edit a dumpster.page
+4. View a dumpster.page
+
+One constraint I really love to work with is not having auth. This is an interesting challenge for this little website, mainly because when you create or edit a page, you want to be able to get back to that page. And because it's also collaborative, you need the ability to have others be able to join your edit session, and also ideally come back to that session.
+
+So, what I ended up with: You create a dumpster.page with a slug of your choosing, and the application backend generates an `editId` for you. That `editId` is effectively how you can share your page with other people and have them be able to edit it as well. When you go to the slug, you just get to view the page.
+
+At first I began building my own canvas editor in a similar fashion to mmm.page. But after a few days worth of development, and talking with <ExternalLink href="https://jon.bo">Jon</ExternalLink>, came to the realization that <ExternalLink href="http://tldraw.com">tldraw</ExternalLink> has <ExternalLink href="https://tldraw.dev">an SDK</ExternalLink>, and it basically would fit the bill nicely. Plus they had the collaboration bit solved as well.
+
+So that is what became dumpster.page. It's basically a tiny tldraw wrapper that lets you publish anything directly to the internet.
+
+Here are a few of my dumpster pages:
+
+* <ExternalLink href="https://www.dumpster.page/vcf2025">Vintage Computer Festival SoCal 2025</ExternalLink>
+* <ExternalLink href="https://dumpster.page/factory">Dumpster Factory (features/bugs)</ExternalLink>
+* <ExternalLink href="https://www.dumpster.page/footy">Footy Foot Pedal</ExternalLink>
+* <ExternalLink href="https://www.dumpster.page/2025">Early 2025</ExternalLink>
+* <ExternalLink href="https://www.dumpster.page/ollie-hits-the-bong">Ollie Hits the Bong (Climbing JTree)</ExternalLink>
