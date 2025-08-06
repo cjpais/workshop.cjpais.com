@@ -1,0 +1,21 @@
+---
+title: Cappy
+description: a community hosted S3 alternative
+startDate: August 2024
+endDate: June 2025
+draft: false
+---
+
+[Cappy](https://cappy.space) is one of the many projects to come from the ['Mac Mini Network'](https://andromeda.computer). These days it's effectively self-hosted S3 using [Garage](https://garagehq.deuxfleurs.fr) on a variety of friend's computers.
+
+Cappy started as [an idea](https://www.tldraw.com/r/ya1IFKQdU4udhufIeChU-?d=v-1228.-381.4831.3131.page) with [Jon](https://jon.bo) back in August 2024. The main concerns were "how do we send files better?" and "how do we run this on our own hardware". This first iteration turned into [this repo](https://github.com/andromeda-computer/cappy). It also started as running on just a single machine.
+
+For a while this worked reasonably well and at times it was convenient. However the machine that I was hosted on was just not very stable and Cappy ended up going down quite often. Not to mention the way to access the API it provided was quite inconvenient, and overall, it just wasn't as robust as something like S3.
+
+The project just simmered for a few months. Eventually I got curious about self-hosting S3, and maybe it would be suitable for Cappy. That way any application I wanted to build with storage I would have our Cappy S3 backend as an option and if it ever wanted to go to some other S3 store it would be really easy.
+
+I had been looking into [Garage](https://garagehq.deuxfleurs.fr) on and off for years, and finally decided to give it a try. As far as I can tell it is extrememly well suited to our application and purpose. It is meant for geo-distributed heterogenous clusters with some level of fault tolerance, and has an S3 compatible API. Pretty damn impressive work if you ask me.
+
+So, given that the Mac Mini Network was all on [Tailscale](https://tailscale.com), we wired up a bunch of machines, so they all used Garage, and now we have an S3 backend. The way that you write into the S3 buckets is by being with inside the VPN, so there's no specific auth necessary.
+
+While, the project isn't dead, there's no specific need for it at this moment. So, it's kind of just in the background as something interesting and a fun exploration of what's possible using community-owned and run infrastructure.
