@@ -1,10 +1,5 @@
-import { parse, format } from "date-fns";
 import { FullPost } from "../lib/types";
-
-const formatDate = (date: string) => {
-  const parsedDate = parse(date, "EEEE MMMM do, yyyy", new Date());
-  return format(parsedDate, "MMM yyyy");
-};
+import { formatPostDate } from "../lib/dateUtils";
 
 const PostList = ({ title, posts }: { title: string; posts: FullPost[] }) => {
   // if posts is empty return nothing
@@ -18,11 +13,15 @@ const PostList = ({ title, posts }: { title: string; posts: FullPost[] }) => {
       <div class="space-y-3">
         {Object.entries(posts).map(([id, post]) => {
           return (
-            <div class={"flex items-baseline"}>
-              <p class={"w-20 min-w-20 font-light text-dim"}>
-                {formatDate(post.date)}
+            <div class={"flex flex-col lg:flex-row lg:items-baseline relative"}>
+              <p
+                class={
+                  "hidden lg:block w-40 min-w-40 text-sm font-light text-dim lg:absolute lg:-left-44 pt-[6px] lg:w-24 lg:text-right"
+                }
+              >
+                {formatPostDate(post.date, post.startDate, post.endDate)}
               </p>
-              <div class={"flex flex-col"}>
+              <div class={"flex flex-col lg:ml-0"}>
                 <a
                   href={`${title.toLowerCase()}/${post.slug}`}
                   class={"text-lg"}

@@ -2,6 +2,8 @@
 title: Handy M0100
 description: a 1985 apple m0100 mouse converted into a wireless speech to text button
 date: Thursday May 1st, 2025
+startDate: February 2025
+endDate: May 2025
 draft: false
 ---
 
@@ -25,12 +27,12 @@ We're gonna turn it into a wireless input device, built for speech to text.
 ![A 1985 Apple Mouse sitting on top of a 2025 Macbook Pro](/images/handy-m0100/mac-handy.jpeg)
 
 Wanna learn more? Well strap in, I got a lot of details below. If you prefer video, check
-out the <ExternalLink href="https://www.youtube.com/shorts/9ylfqyJzeF0">short</ExternalLink> 
+out the <ExternalLink href="https://www.youtube.com/shorts/9ylfqyJzeF0">short</ExternalLink>
 or full length <ExternalLink href="https://youtu.be/ooXTc6emtvA">YouTube Video</ExternalLink>
 
 ## Backstory
 
-I went to the <ExternalLink href="https://www.vcfsocal.com/">SoCal Vintage Computer Fair</ExternalLink> 
+I went to the <ExternalLink href="https://www.vcfsocal.com/">SoCal Vintage Computer Fair</ExternalLink>
 with my friend <ExternalLink href="https://jordanmccommons.com/">Jordan</ExternalLink>. At
 the time I had a broken finger and had been working on the [Footy](/projects/footy) foot pedal.
 I had just finished the prototype, so going into the event I brought Footy.
@@ -39,11 +41,11 @@ the possibility of making custom PCB design for it. While I didn't end up making
 PCB for Footy, bringing it got me thinking about foot pedals and
 vintage computer hardware that could be used for one.
 
-Jordan and I walked around for a while 
+Jordan and I walked around for a while
 <ExternalLink href="https://dumpster.page/vcf2025">enjoying all that the fair had to offer</ExternalLink>.
 I learned a bunch about all kinds of hardware I had never seen before. On the first lap around
 the fair I did take notice of the vintage Apple mice. I half joked with Jordan about turning
-one into a foot pedal, and on the second lap I was seriously considering it. Mostly for the 
+one into a foot pedal, and on the second lap I was seriously considering it. Mostly for the
 laughs, I found one and put it on the ground to test how it might be. It was hilarious to me,
 and it totally worked great as a foot pedal.
 
@@ -51,14 +53,14 @@ I knew I had to buy at least one. Be it for a foot pedal, or just as
 a really unique speech to text button for my computer. Early on at the fair I bought
 a couple of Byte Magazines from a guy, and he happened to have a few of these mice. I asked him if
 he was willing to sell two of them, and he agreed, 2 for $40. Some other guy told me I was getting
-a good deal, but honestly I had no idea if I had. It was only later I went on 
+a good deal, but honestly I had no idea if I had. It was only later I went on
 <ExternalLink href="https://www.ebay.com/sch/i.html?_nkw=apple+m0100+mouse">eBay to check</ExternalLink>, and
 it seems like I did. I figured getting 2 of them was a good idea in the case I were to break one
 which seemed highly likely given my lacking dissasembly skills.
 
 As soon as I got home, I wanted to open it up just to see what the insides looked like.
 When I tried opening up the first one, I ended up breaking some of the clips because I didn't
-<ExternalLink href="https://youtu.be/HIvFI8KJivM?t=336">go on YouTube</ExternalLink>. 
+<ExternalLink href="https://youtu.be/HIvFI8KJivM?t=336">go on YouTube</ExternalLink>.
 I just brute-forced it apart, but this was good enough to get a look at the guts.
 
 ![internals of the m0100](/images/handy-m0100/internals.jpeg)
@@ -70,7 +72,7 @@ splice a USB-C connector onto the existing cable. This seemed like it could be a
 for a few reasons, but would be a no-go because I wanted to keep the original cable intact. It also wasn't clear to me
 how I could splice on this connector and have it look original still.
 
-With these observations the first few constraints emerged. 
+With these observations the first few constraints emerged.
 
 1. Be nondestructive to this Apple mouse. It should be able to return to service after I have modified it for what I want.
 2. I wanted to keep it looking as close to an original Apple Mouse as possible.
@@ -95,11 +97,11 @@ With this in mind I started to get to work on the first prototype.
 
 ### Deciding on the Microcontroller
 
-Before doing anything, I needed to find the smallest possible microcontroller since I 
+Before doing anything, I needed to find the smallest possible microcontroller since I
 didn't have a ton of room to work. I figured this decision may influence how things would
 be laid out on the baseplate so I wanted to get it done first.
 
-It turned out to be a fairly quick task. However, I was expecting to use whatever 
+It turned out to be a fairly quick task. However, I was expecting to use whatever
 microcontrollers were suggested by QMK, but realized that
 <ExternalLink href="https://docs.qmk.fm/features/wireless#bluetooth-known-supported-hardware">QMK has limited support for Bluetooth keyboards</ExternalLink>.
 So I looked around and found <ExternalLink href="https://zmk.dev/docs">ZMK</ExternalLink> which looked purpose built
@@ -127,10 +129,10 @@ which is commonly used in mice today. It also ended up being a more or less perf
 and just screw into it. Though it is much smaller than the original switch and definitely does not
 have as satisfying of a 'click'.
 
-I will say it took me forever to create nice enough structures for the mouse to work. 
+I will say it took me forever to create nice enough structures for the mouse to work.
 Specifically the towers which hold the button presser thingy.
 While the structures are not perfect, they are good enough for me. I probably went through about 30 iterations
-of the design to land where it is now. 
+of the design to land where it is now.
 
 Another feature you might notice is the 'bridge' that is over the hole where the trackball originally
 went. This is an additional support structure for the Xiao. Basically ensuring that when you plug
@@ -160,7 +162,7 @@ Fitted to the bottom of the mouse it looks something like this. Looks damn good 
 Time to solder everything to the Xiao. I typically start with the battery, and
 I like to make everything removable which means soldering some JST leads onto the Xiao. Usually
 LiPO batteries use JST-PH so I used those for the battery connector. When soldering the leads to the
-Xiao I use the positive pin on the battery section, and the ground on the board itself. 
+Xiao I use the positive pin on the battery section, and the ground on the board itself.
 You can also solder directly to the board (as below), but it's pretty tight and scary,
 especially for a soldering noob like me.
 
@@ -170,8 +172,8 @@ For the switch I used a JST-ZH Female connector, soldered to pins 4 and 6 on the
 When the switch is contacted it should complete the circuit and trigger the appropriate keypress.
 
 Next is soldering some leads to the switch. This is pretty simple, and I just soldered a JST-ZH male connector
-directly to the feet of the switch. You will want to solder to the leg labeled `C` and `NO`. `NO` stands 
-for "Normally Open" which means that the circuit will be closed when button is pressed. 
+directly to the feet of the switch. You will want to solder to the leg labeled `C` and `NO`. `NO` stands
+for "Normally Open" which means that the circuit will be closed when button is pressed.
 
 ![](/images/handy-m0100/switch-legs.jpeg)
 
@@ -179,17 +181,17 @@ for "Normally Open" which means that the circuit will be closed when button is p
 
 Now is the perfect time to flash the firmware. You can flash it and then plug everything into the Xiao
 then test to make sure it works before you assemble anything else. As I mentioned above I used
-ZMK for the firmware, and you can find my <ExternalLink href="https://github.com/cjpais/Handy-M0100-Firmware">repo here</ExternalLink>. 
+ZMK for the firmware, and you can find my <ExternalLink href="https://github.com/cjpais/Handy-M0100-Firmware">repo here</ExternalLink>.
 The firmware is built using GitHub Actions and can be found in the actions tab of the repo.
 
-Flashing the firmware is relatively simple. First <ExternalLink href="https://github.com/cjpais/Handy-M0100-Firmware/actions/runs/14579988506">download the firmware</ExternalLink>. 
+Flashing the firmware is relatively simple. First <ExternalLink href="https://github.com/cjpais/Handy-M0100-Firmware/actions/runs/14579988506">download the firmware</ExternalLink>.
 Then plug the Xiao into your computer and double click the tiny button near the USB-C port to put it into
-it's bootloader. Drag and drop the `.uf2` file onto it, it should reboot, and you 
-can test if it works. 
+it's bootloader. Drag and drop the `.uf2` file onto it, it should reboot, and you
+can test if it works.
 
-The default keymap is a <ExternalLink href="https://zmk.dev/docs/keymaps/behaviors/hold-tap#mod-tap">"mod-tap"</ExternalLink> 
+The default keymap is a <ExternalLink href="https://zmk.dev/docs/keymaps/behaviors/hold-tap#mod-tap">"mod-tap"</ExternalLink>
 which will hold down `Right Control + Right Meta` as long as the button is pressed.
-This is the default key used by the Handy desktop application (coming soon! open source!). However once the firmware is flashed you can easily 
+This is the default key used by the Handy desktop application (coming soon! open source!). However once the firmware is flashed you can easily
 change the keymap using <ExternalLink href="https://zmk.studio">ZMK Studio</ExternalLink> to suit
 the application of your liking. Plug the mouse in via USB and it should just work.
 
@@ -221,7 +223,7 @@ The assembly of the mouse is fairly straightforward once you have everything sol
 
 ### Prototype Reflections
 
-I was pretty happy with this version. Everything worked decently well, and it 
+I was pretty happy with this version. Everything worked decently well, and it
 was so rad to use this old mouse with my modern computer. Plus the battery life was surprisingly great.
 I did enable deep sleep on the firmware so the mouse will disconnect after a few hours of inactivity.
 This means when I sit at my desk for the first time I usually just click the button and it will boot
@@ -235,8 +237,8 @@ and switch.
 ## Using the Orignal PCB
 
 After I figured out all of the stuff from the other version, using the PCB became a pretty
-simple task. More or less it was just a matter of stuffing everything into the original spaces 
-and connecting to the original switch. 
+simple task. More or less it was just a matter of stuffing everything into the original spaces
+and connecting to the original switch.
 
 What made all this possible was the tiny size of the Xiao. When removing the trackball from the mouse,
 I could slot the Xiao in that space perfectly.
@@ -245,22 +247,22 @@ So the main problem was to both connect to the original switch and place the bat
 ### Connecting to the Switch
 
 To connect to the switch I took a look at the PCB and traced some of the wires. On the top side
-we have a molex connector where the original cable was connected. Unplugging that we have a bunch 
-of pins which go to the switch and trackball. Turning the PCB over, on the bottom we see 
-labels for `SWITCH` and `GROUND` which map to the pins on top. So we will connect these 
-to pins 4 and 6 on the microcontroller. 
+we have a molex connector where the original cable was connected. Unplugging that we have a bunch
+of pins which go to the switch and trackball. Turning the PCB over, on the bottom we see
+labels for `SWITCH` and `GROUND` which map to the pins on top. So we will connect these
+to pins 4 and 6 on the microcontroller.
 
 ![bottom of the pcb](/images/handy-m0100/pcb-bottom.jpeg)
 
 I made a custom little cable with Dupont female connectors on one end to connect to the PCB,
 and on the other end a JST-ZH male connector. This connector would connect to the JST Female
-connector on the microcontroller. The JST-ZH is tiny and can be sqeezed through the holes 
+connector on the microcontroller. The JST-ZH is tiny and can be sqeezed through the holes
 around the trackball structure which made things easier to work with.
 
 ### Placing the Battery
 
-The only thing left is a place for the battery. I chose an 80mAh battery since they are quite tiny, and 
-probably could fit many places. Sure enough on the corner of the mouse there's a space it fits quite nicely. 
+The only thing left is a place for the battery. I chose an 80mAh battery since they are quite tiny, and
+probably could fit many places. Sure enough on the corner of the mouse there's a space it fits quite nicely.
 Some of my leads were a long or awkward so I just taped them down as necessary.
 
 ![photo of the battery slotted into the mouse](/images/handy-m0100/battery.jpeg)
@@ -291,7 +293,7 @@ useful for syntactics, but it's nice to have my literal voice shine through I th
 ## Wanna Build One??
 
 Hopefully I've done a good enough job of talking through things here that it's easy enough to do.
-Here are the resources you may need. 
+Here are the resources you may need.
 
 If you have any questions email me: <ExternalLink href="mailto:cj@cjpais.com">cj@cjpais.com</ExternalLink>
 

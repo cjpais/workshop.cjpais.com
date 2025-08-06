@@ -2,7 +2,9 @@ import { z } from "zod";
 
 export const FullPostFrontmatterSchema = z.object({
   title: z.string(),
-  date: z.string(),
+  date: z.string().optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
   description: z.string(),
   draft: z.boolean().default(false),
 });

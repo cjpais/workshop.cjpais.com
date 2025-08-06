@@ -1,99 +1,102 @@
 @import "tailwindcss" source("../app");
 
 @theme {
-  --color-bg-primary: hsl(35, 10%, 15%);
-  --color-text-primary: hsl(35, 10%, 75%);
-  --color-dim: hsl(35, 10%, 50%);
-  --color-very-dim: hsl(35, 10%, 30%);
-  --color-bg-code: hsl(35, 10%, 10%);
-  --color-accent: hsl(270, 50%, 70%);
+    --color-bg-primary: hsl(35, 10%, 15%);
+    --color-text-primary: hsl(35, 10%, 75%);
+    --color-dim: hsl(35, 10%, 50%);
+    --color-very-dim: hsl(35, 10%, 30%);
+    --color-bg-code: hsl(35, 10%, 10%);
+    --color-accent: hsl(270, 50%, 70%);
 }
 
 html {
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  font-size: 1.05rem;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-size: 1.05rem;
 }
 
 a {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 a:hover {
-  color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 h1 {
-  font-size: 2.25rem;
+    font-size: 1.8rem;
+    @apply md:text-4xl;
 }
 h2 {
-  font-size: 1.842rem;
+    font-size: 1.5rem;
+    @apply md:text-3xl;
 }
 h3 {
-  font-size: 1.3572rem;
+    font-size: 1.25rem;
+    @apply md:text-xl;
 }
 h4 {
-  font-size: 1.1725rem;
-  @apply font-medium;
+    font-size: 1.125rem;
+    @apply font-medium md:text-lg;
 }
 
 hr {
-  @apply border-very-dim;
+    @apply border-very-dim;
 }
 
 code {
-  background: var(--color-bg-code);
-  padding: 0.2rem 0.4rem;
-  @apply rounded;
-  font-size: 0.9rem;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone; /* For Safari */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  max-width: 100%;
+    background: var(--color-bg-code);
+    padding: 0.2rem 0.4rem;
+    @apply rounded;
+    font-size: 0.9rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone; /* For Safari */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
 }
 
 pre {
-  background: var(--color-bg-code);
-  padding: 0.6rem 0.8rem;
-  @apply rounded;
-  font-size: 0.9rem;
-  overflow-x: auto;
-  max-width: 100%;
+    background: var(--color-bg-code);
+    padding: 0.6rem 0.8rem;
+    @apply rounded;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 pre code {
-  background: none;
-  padding: 0;
-  @apply rounded-none;
-  white-space: pre;
+    background: none;
+    padding: 0;
+    @apply rounded-none;
+    white-space: pre;
 }
 
 img {
-  @apply rounded-xl;
-  @apply justify-self-center;
+    @apply rounded-xl;
+    @apply justify-self-center;
 }
 
 ul,
 ol {
-  @apply my-4 pl-5 list-outside;
+    @apply my-4 pl-5 list-outside;
 }
 
 ul {
-  @apply list-disc; /* Standard bullet points */
+    @apply list-disc; /* Standard bullet points */
 }
 
 ol {
-  @apply list-decimal; /* Standard numbers */
+    @apply list-decimal; /* Standard numbers */
 }
 
 /* Spacing between list items */
 li {
-  @apply mb-1;
+    @apply mb-1;
 }
 
 /* Nested list styling */
 li > ul,
 li > ol {
-  @apply mt-0 mb-0 ml-0;
+    @apply mt-0 mb-0 ml-0;
 }
